@@ -10,6 +10,7 @@ app.get('/', (req, res) => {
     res.send('server start!')
   })
 
+// Connect to the MongoDB database
 mongoose.connect("mongodb://127.0.0.1:27017/Final_Project_DB")
   .then(() => {
     console.log("Connected successfully to the MongoDB database");
@@ -18,6 +19,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/Final_Project_DB")
     console.error("An error occurred while connecting to MongoDB:", error);
   });
 
+//Server
 try {
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
