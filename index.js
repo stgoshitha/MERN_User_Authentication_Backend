@@ -1,6 +1,8 @@
 const express = require('express') 
 const { default: mongoose } = require('mongoose');
 const AuthRoutes = require('./routes/AuthRoute.js') ;
+const cookieparser = require('cookie-parser')
+
 
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -11,6 +13,7 @@ const app = express();
 const port = process.env.PORT || 3000
 
 app.use(express.json());
+app.use(cookieparser());
 app.use(cors());
 
 app.get('/', (req, res) => {
