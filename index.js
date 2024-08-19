@@ -1,17 +1,26 @@
 const express = require('express') 
 const { default: mongoose } = require('mongoose');
+const AuthRoutes = require('./routes/Auth.js') ;
 
+const dotenv = require('dotenv');
+const cors = require('cors');
+
+dotenv.config();
 const app = express();
 
-require('dotenv').config();
 const port = process.env.PORT || 3000
+
+app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('server start!')
   })
 
+app.use('/api/auth', AuthRoutes)
+
 // Connect to the MongoDB database
-mongoose.connect("mongodb://127.0.0.1:27017/Final_Project_DB")
+mongoose.connect(process.env.MongoURL)
   .then(() => {
     console.log("Connected successfully to the MongoDB database");
   })
@@ -25,5 +34,5 @@ try {
       console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
-    console.error("Failed to start the server:", error);
+      console.error("Failed to start the server:", error);
 }
