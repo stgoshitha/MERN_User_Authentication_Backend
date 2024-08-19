@@ -1,6 +1,6 @@
 const express = require('express') 
 const { default: mongoose } = require('mongoose');
-const AuthRoutes = require('./routes/Auth.js') ;
+const AuthRoutes = require('./routes/AuthRoute.js') ;
 
 const dotenv = require('dotenv');
 const cors = require('cors');
