@@ -1,7 +1,9 @@
 const express = require('express') 
 const { default: mongoose } = require('mongoose');
-const AuthRoutes = require('./routes/AuthRoute.js') ;
-const cookieparser = require('cookie-parser')
+const cookieparser = require('cookie-parser');
+const AuthRoutes = require('./routes/AuthRoute.js');
+const AdminRoutes = require('./routes/AdminRoute.js');
+
 
 
 const dotenv = require('dotenv');
@@ -21,6 +23,7 @@ app.get('/', (req, res) => {
   })
 
 app.use('/api/auth', AuthRoutes)
+app.use('/api/admin', AdminRoutes)
 
 // Connect to the MongoDB database
 mongoose.connect(process.env.MongoURL)
