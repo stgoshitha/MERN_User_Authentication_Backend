@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const userSechema = new mongoose.Schema({
-    name:{
+    firstName:{
+        type: String,
+        required: true
+    },
+    lastName:{
         type: String,
         required: true
     },
@@ -13,7 +17,7 @@ const userSechema = new mongoose.Schema({
     role:{
         type: String,
         enum: ['jobSeeker', 'employer', 'admin'],
-        default: 'jobSeeker'
+        
     },
     password:{
         type: String,

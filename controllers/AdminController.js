@@ -17,12 +17,6 @@ const deletUser = async(req,res) =>{
     try {
         const userId = req.params.id
 
-        const checkAdmin = await userModel.findById(userId)
-
-        if(checkAdmin.role == 'admin'){
-            res.status(401).json({massage:'you can not delet admin'})
-        }
-
         const user = await userModel.findByIdAndDelete(userId)
 
         if(!user){

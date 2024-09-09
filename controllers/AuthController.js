@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     try {
-        const { name, email,role, password } = req.body;
+        const { firstName, lastName, email,role, password } = req.body;
 
         //find user already exist or not using email
         const existUser = await userModel.findOne({email});
@@ -21,7 +21,8 @@ const register = async (req, res) => {
 
         //create new user object
         const newUser = new userModel({
-            name,
+            firstName,
+            lastName,
             email,
             role,
             password:hashedPassword
@@ -106,4 +107,32 @@ const logout = async(req,res) =>{
 
 }
 
-module.exports = {register, login, logout};
+const getOneUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        // Find user by ID
+        const user = await userModel.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            user
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({
+            success: false,
+            message: 'Internal server error'
+        });
+    }
+};
+
+
+module.exports = {register, login, logout, getOneUser};
